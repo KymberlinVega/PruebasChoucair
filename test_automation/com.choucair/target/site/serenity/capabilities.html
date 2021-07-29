@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Requirements</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!--[if IE 7]>
+<!--<link rel="stylesheet" href="font-awesome/css/font-awesome-ie7.min.css">-->
+
+<link rel="stylesheet" href="fontawesome-free-5.7.2-web/css/all.min.css">
+<link rel="stylesheet" href="fontawesome-free-5.7.2-web/css/v4-shims.min.css">
+
+<!-- JQuery -->
+<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><link rel="stylesheet" href="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.css">
+<link rel="stylesheet" href="chartist/dist/chartist.min.css">
+<script src="chartist/dist/chartist.min.js"></script>
+<script src="chartist/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script><!-- Required Stylesheets -->
+<link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
+
+<!-- Required Javascript -->
+<script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.19/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.19/datatables.min.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.19/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.19/datatables.bootstrap4.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/core.css"/>
+<link rel="stylesheet" href="css/link.css"/>
+<link type="text/css" media="screen" href="css/screen.css" rel="Stylesheet"/><!-- JQuery-UI -->
+<link type="text/css" href="jqueryui/1.11.2-start/jquery-ui.min.css" rel="Stylesheet" />
+<script type="text/javascript" src="jqueryui/1.11.2-start/jquery-ui.min.js"></script><!-- DataTables -->
+<link type="text/css" href="datatables/1.10.19/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/1.10.19/datatables.min.js"></script>
+
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="datatables/1.10.19/datatables.bootstrap4.min.js"></script>
+<link type="text/css" href="datatables/1.10.19/datatables.bootstrap4.min.css" rel="stylesheet" />
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            var scenarioTable = $('.scenario-result-table').DataTable({
+
+                "order": [],
+                "language": {
+                    searchPlaceholder: "Filter",
+                    search: ""
+                }
+            });
+
+            $('.example-table table').DataTable({
+                searching: false,
+                ordering: false,
+                paging: false,
+                info: false
+            });
+
+            $('.example-table-in-scenario table').DataTable({
+                searching: false,
+                ordering: false,
+                paging: false,
+                info: false
+            });
+
+            $('#evidence-table').DataTable(
+                    {
+                        searching: false,
+                        ordering: false,
+                        paging: false,
+                        info: false
+                    }
+            );
+
+
+            $(".scenario-docs .card-body table").wrap("<div class='table-responsive'></div>");
+
+            $("#requirements-tabs").tabs();
+            $("#test-tabs").tabs();
+
+            var requirementsTree = [{"text":"Empleos","type":"feature","href":"feature_empleos.html","nodes":[],"selectable":false,"tags":["\u003ci class\u003d\u0027fa fa-check-circle-o success-icon \u0027 title\u003d\u0027SUCCESS\u0027\u003e\u003c/i\u003e","\u003cspan class\u003d\u0027feature-count\u0027\u003e28 scenarios\u003c/span\u003e"]}];
+
+            $('#tree').treeview({
+                data: requirementsTree,
+                enableLinks: true,
+                showTags: true,
+                expandIcon: "glyphicon glyphicon-folder-close",
+                collapseIcon: "glyphicon glyphicon-folder-open",
+                emptyIcon: "glyphicon glyphicon-book"
+            });
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".scenario-docs > div > p").html(function () {
+                var text = $(this).text().trim().split(" ");
+                var first = text.shift();
+                return (text.length > 0 ? "<strong>" + first + "</strong> " : first) + text.join(" ");
+            });
+        });
+    </script>
+</head>
+
+<body class="results-page">
+<div id="topheader">
+    <div id="topbanner">
+        <div id="logo"><a href="index.html"><img src="images/serenity-logo.png" border="0"/></a></div>
+        <div id="projectname-banner" style="float:right">
+            <span class="projectname">
+                <span class="projecttitle">Proyecto Base Choucair</span>
+                <span class="projectsubtitle"></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<div class="middlecontent">
+    <div id="contenttop">
+        <div class="middlebg">
+            <span class="breadcrumbs">
+            <a href='index.html'>Home</a> > <a href="capabilities.html">Requirements</a>
+
+
+
+            </span>
+        </div>
+        <div class="rightbg"></div>
+    </div>
+    <div class="clr"></div>
+
+    <!--/* starts second table*/-->
+
+<div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li >
+            <a href="index.html"><i class="fa fa-check-square-o"></i> Overall Test Results</a>
+        </li>
+        <li class="active">
+            <a href="#"><i class="fa fa-book"></i> Requirements</a>
+        </li>
+        <li >
+            <a href="requirement_type_feature.html"><i class="fa fa-comments-o"></i> Features</a>
+        </li>
+    </ul>
+    <span class="date-and-time"><a href="build-info.html"><i class="fa fa-info-circle"></i></a> Report generated 28-07-2021 16:20</span>
+    <br style="clear:left"/>
+</div>
+
+    <div class="clr"></div>
+
+    <div id="beforetable"></div>
+    <div id="results-dashboard">
+        <div class="table">
+
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <!-- Requirements result tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#specs"><i class="fas fa-comments"></i> Specifications</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#results"><i class="fas fa-tachometer-alt"></i> Test Results</a>
+                        </li>
+                    </ul>
+
+                    <!-- Specifications and Results tabs -->
+                    <div class="card border">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div id="specs" class="tab-pane fade in active">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+
+                                            <h3>Scenarios</h3>
+
+                                            <div id="toc">
+                                                <table class="table" id="toc-table">
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#c9c0ba10ff04b97e161967c6e3035e17551abf8951a8542ca801d0a024b2d153" title="View scenario details" >1. Validar ingreso a la opcion empleos</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_1._validar_ingreso_a_la_opcion_empleos.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_1._validar_ingreso_a_la_opcion_empleos.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#8bf2c974f2489d79364a4306ee86459941fe4a52d44f3759710fa2944ef2a340" title="View scenario details" >2. Validar ingreso a la opcion servicios</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_2._validar_ingreso_a_la_opcion_servicios.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_2._validar_ingreso_a_la_opcion_servicios.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#d397db7394b0d24a9085e86ac1ade7ad0f309c0fec94e9715338680b3753d51b" title="View scenario details" >3. Validar ingreso a la opcion industrias</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_3._validar_ingreso_a_la_opcion_industrias.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_3._validar_ingreso_a_la_opcion_industrias.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#7ca91fc5e250167fd4e7ca79905f1f13585cc5f93a69ad43dd3f075902a41dc9" title="View scenario details" >4. Validar ingreso a la opcion formación</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_4._validar_ingreso_a_la_opcion_formación.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_4._validar_ingreso_a_la_opcion_formación.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#df94b16e8153af64094d999aafcd026dd4f91839708b53bc1c2475507ea360d8" title="View scenario details" >5. Validar ingreso a la opcion comunidad</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_5._validar_ingreso_a_la_opcion_comunidad.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_5._validar_ingreso_a_la_opcion_comunidad.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#16e7968b487250ba8dc1a3d0eb5a24291c7920f4b363d06aab9a1c11794c080d" title="View scenario details" >6. Validar ingreso a la opcion nosotros</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_6._validar_ingreso_a_la_opcion_nosotros.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_6._validar_ingreso_a_la_opcion_nosotros.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#ad267ad3f814b41af43276add0d809d640354891ab86d66390545970926d366e" title="View scenario details" >7. Validar ingreso a la opcion contáctenos</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_7._validar_ingreso_a_la_opcion_contáctenos.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_7._validar_ingreso_a_la_opcion_contáctenos.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#c31509cf3f353bd2e507e25a972d398f968f1e94f466101ffe171796513ea5e0" title="View scenario details" >8. Validar ingreso a la opcion Modelo de calidad de software</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_8._validar_ingreso_a_la_opcion_modelo_de_calidad_de_software.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_8._validar_ingreso_a_la_opcion_modelo_de_calidad_de_software.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#ce79c223705b68a67a79a3d51815ed669497743043e08a3b3921ab5da32e0e5f" title="View scenario details" >9. Validar ingreso a la opcion Diferencia entre calidad de software y pruebas</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_9._validar_ingreso_a_la_opcion_diferencia_entre_calidad_de_software_y_pruebas.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_9._validar_ingreso_a_la_opcion_diferencia_entre_calidad_de_software_y_pruebas.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#eb7663fa19d7db44a58207c1a8946efe3947803ab8b4dc647ec2c3ea0eeef4e0" title="View scenario details" >10. Validar ingreso a la opcion Papel de los ingenieros</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_10._validar_ingreso_a_la_opcion_papel_de_los_ingenieros.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_10._validar_ingreso_a_la_opcion_papel_de_los_ingenieros.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#fa404829abc87208cc7d72b4d5b7a2798ecc627fa9406f19fbe997b40d534c13" title="View scenario details" >11. Validar ingreso a la opcion El software en la economía actual</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_11._validar_ingreso_a_la_opcion_el_software_en_la_economía_actual.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_11._validar_ingreso_a_la_opcion_el_software_en_la_economía_actual.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#919ba188b11ccfd54ead65d5b1ef5fbf1e201cfab3a7bf6be103cf0eb7ba8ab5" title="View scenario details" >12. Validar ingreso a la opcion Los errores del software</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_12._validar_ingreso_a_la_opcion_los_errores_del_software.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_12._validar_ingreso_a_la_opcion_los_errores_del_software.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#576c8e3b01a66481d89426c82e9ab95fbb15d8737887c75977def5285bb608b8" title="View scenario details" >13. Validar ingreso a la opcion Calidad de software</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_13._validar_ingreso_a_la_opcion_calidad_de_software.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_13._validar_ingreso_a_la_opcion_calidad_de_software.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#0ad704685e1a2656bbaa28df9bdebf72f345bfe16000c953ea80a7b977b83287" title="View scenario details" >14. Validar ingreso a la opcion Fundamentos ingeniería de software</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_14._validar_ingreso_a_la_opcion_fundamentos_ingeniería_de_software.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_14._validar_ingreso_a_la_opcion_fundamentos_ingeniería_de_software.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#f5848f70811049f22a3287dbb35bb79744faab435d4e378a4a0d794a62dd0a17" title="View scenario details" >15. Validar ingreso a la opcion Marcos de trabajo de software: ágiles/tradicionales</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_15._validar_ingreso_a_la_opcion_marcos_de_trabajo_de_software__ágiles_tradicionales.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_15._validar_ingreso_a_la_opcion_marcos_de_trabajo_de_software__ágiles_tradicionales.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#455e615ea19c485db92b8087ec449a23fe1e6f42810af666f3576effab65ca09" title="View scenario details" >16. Validar ingreso a la opcion Principios de programación</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_16._validar_ingreso_a_la_opcion_principios_de_programación.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_16._validar_ingreso_a_la_opcion_principios_de_programación.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#7c2250102a73c761349912b892774c3acef54ab94d6c3d324046fdc5bf0101fb" title="View scenario details" >17. Validar ingreso a la opcion Algoritmos de software</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_17._validar_ingreso_a_la_opcion_algoritmos_de_software.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_17._validar_ingreso_a_la_opcion_algoritmos_de_software.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#968ac035f40f82987928a7096435b68d437ef2863cfd5ac1c2501ea47029eff6" title="View scenario details" >18. Validar ingreso a la opcion ¿Qué es programación por Ncapas?</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_18._validar_ingreso_a_la_opcion_¿qué_es_programación_por_ncapas_question_.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_18._validar_ingreso_a_la_opcion_¿qué_es_programación_por_ncapas_question_.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#19eecfb8574b051b940be3f7f95a623df9425b67f462a893ec5621dbd36dbc9b" title="View scenario details" >18. Validar ingreso a la opcion Manual práctico de SQL</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_18._validar_ingreso_a_la_opcion_manual_práctico_de_sql.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_18._validar_ingreso_a_la_opcion_manual_práctico_de_sql.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#b113db53f5e5174d7b24b09739573ccaa9dc26a22f524a6b331413b8a0af89ca" title="View scenario details" >19. Validar ingreso a la opcion Marcos de trabajo de pruebas</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_19._validar_ingreso_a_la_opcion_marcos_de_trabajo_de_pruebas.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_19._validar_ingreso_a_la_opcion_marcos_de_trabajo_de_pruebas.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#2f3d9fffe9d037052fe7e2ff94ddbc745567f908a8099fc0fe9e0fef9619efaa" title="View scenario details" >20. Validar ingreso a la opcion ¿Qué son los riesgos del proyecto y de producto?</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_20._validar_ingreso_a_la_opcion_¿qué_son_los_riesgos_del_proyecto_y_de_producto_question_.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_20._validar_ingreso_a_la_opcion_¿qué_son_los_riesgos_del_proyecto_y_de_producto_question_.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#cc8da8dacf07c3be52bd32dda23195cfccc0dcc4697b88ecdc5f019991e6130e" title="View scenario details" >21. Validar ingreso a la opcion Técnicas de caja negra</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_21._validar_ingreso_a_la_opcion_técnicas_de_caja_negra.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_21._validar_ingreso_a_la_opcion_técnicas_de_caja_negra.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#75b0277bdb5b40024651dd8c4326c1bdbb3021e9904b16c41f33d2e7d78a7774" title="View scenario details" >22. Validar ingreso a la opcion Foundation Level – Técnicas</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_22._validar_ingreso_a_la_opcion_foundation_level_–_técnicas.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_22._validar_ingreso_a_la_opcion_foundation_level_–_técnicas.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#247440adbf817c1c515f6921a82118dafbc9757a1b632718dd5077bf21607909" title="View scenario details" >23. Validar ingreso a la opcion Fundamentos de la gerencia de proyectos en desarrollo de software</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_23._validar_ingreso_a_la_opcion_fundamentos_de_la_gerencia_de_proyectos_en_desarrollo_de_software.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_23._validar_ingreso_a_la_opcion_fundamentos_de_la_gerencia_de_proyectos_en_desarrollo_de_software.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#120f1b349c526d552708e41880bce885f779e1972432364e5606489b8631ee91" title="View scenario details" >24. Validar ingreso a la opcion ¿Cuáles son las actividades de la Gestión de Proyectos?</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_24._validar_ingreso_a_la_opcion_¿cuáles_son_las_actividades_de_la_gestión_de_proyectos_question_.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_24._validar_ingreso_a_la_opcion_¿cuáles_son_las_actividades_de_la_gestión_de_proyectos_question_.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#61d44e2ef684e648fb4aef742ad196852eb9149cdca001501e5f4c7210f696d1" title="View scenario details" >25. Validar ingreso a la opcion Ir al portal de empleos</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_25._validar_ingreso_a_la_opcion_ir_al_portal_de_empleos.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_25._validar_ingreso_a_la_opcion_ir_al_portal_de_empleos.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#bced0c0c0fb83465614dafce58ff504fb9c368f04c96a46fd05a98e4e0f3b56d" title="View scenario details" >27. Validar ingreso a la opcion ¿Qué es ser Choucair?</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_27._validar_ingreso_a_la_opcion_¿qué_es_ser_choucair_question_.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_27._validar_ingreso_a_la_opcion_¿qué_es_ser_choucair_question_.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width:95%;" class="toc-title">
+                                                                <a href="#6b4fd805d4217e0b23c62d73f3c9f0375f9173365d87783c9ab013a8d2aab086" title="View scenario details" >27. Validar ingreso a la opcion Prepararse para aplicar</a>
+
+
+                                                            </td>
+                                                            <td style="width:5%;">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_27._validar_ingreso_a_la_opcion_prepararse_para_aplicar.html"
+                                                                               title="View test results">
+                                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                                            </a>
+
+                                                                        
+                                                                        </td>
+                                                                        <td>
+                                                                            <a style="margin-left:0.5em;padding-right: 1.5em;"
+                                                                               href="empleos_27._validar_ingreso_a_la_opcion_prepararse_para_aplicar.html"
+                                                                               title="View test results">
+                                                                                <i class="fas fa-search-plus"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                </table>
+
+                                            </div>
+
+                                            <h3>Scenario details</h3>
+
+                                                <div class="scenario-docs card" id="c9c0ba10ff04b97e161967c6e3035e17551abf8951a8542ca801d0a024b2d153">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_1._validar_ingreso_a_la_opcion_empleos.html" title="View test results">1. Validar ingreso a la opcion empleos</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Comparar ruta: Empleos</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="8bf2c974f2489d79364a4306ee86459941fe4a52d44f3759710fa2944ef2a340">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_2._validar_ingreso_a_la_opcion_servicios.html" title="View test results">2. Validar ingreso a la opcion servicios</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Servicios</p>
+                                                            <p>Then Comparar ruta: Servicios</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="d397db7394b0d24a9085e86ac1ade7ad0f309c0fec94e9715338680b3753d51b">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_3._validar_ingreso_a_la_opcion_industrias.html" title="View test results">3. Validar ingreso a la opcion industrias</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Industrias</p>
+                                                            <p>Then Comparar ruta: Industrias</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="7ca91fc5e250167fd4e7ca79905f1f13585cc5f93a69ad43dd3f075902a41dc9">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_4._validar_ingreso_a_la_opcion_formación.html" title="View test results">4. Validar ingreso a la opcion formación</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Formación</p>
+                                                            <p>Then Comparar ruta: Formación</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="df94b16e8153af64094d999aafcd026dd4f91839708b53bc1c2475507ea360d8">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_5._validar_ingreso_a_la_opcion_comunidad.html" title="View test results">5. Validar ingreso a la opcion comunidad</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Comunidad</p>
+                                                            <p>Then Comparar ruta: Comunidad</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="16e7968b487250ba8dc1a3d0eb5a24291c7920f4b363d06aab9a1c11794c080d">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_6._validar_ingreso_a_la_opcion_nosotros.html" title="View test results">6. Validar ingreso a la opcion nosotros</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Nosotros</p>
+                                                            <p>Then Comparar ruta: Nosotros</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="ad267ad3f814b41af43276add0d809d640354891ab86d66390545970926d366e">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_7._validar_ingreso_a_la_opcion_contáctenos.html" title="View test results">7. Validar ingreso a la opcion contáctenos</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Contáctenos</p>
+                                                            <p>Then Comparar ruta: Contáctenos</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="c31509cf3f353bd2e507e25a972d398f968f1e94f466101ffe171796513ea5e0">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_8._validar_ingreso_a_la_opcion_modelo_de_calidad_de_software.html" title="View test results">8. Validar ingreso a la opcion Modelo de calidad de software</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Modelo de calidad de software</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="ce79c223705b68a67a79a3d51815ed669497743043e08a3b3921ab5da32e0e5f">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_9._validar_ingreso_a_la_opcion_diferencia_entre_calidad_de_software_y_pruebas.html" title="View test results">9. Validar ingreso a la opcion Diferencia entre calidad de software y pruebas</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Diferencia entre calidad de software y pruebas</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="eb7663fa19d7db44a58207c1a8946efe3947803ab8b4dc647ec2c3ea0eeef4e0">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_10._validar_ingreso_a_la_opcion_papel_de_los_ingenieros.html" title="View test results">10. Validar ingreso a la opcion Papel de los ingenieros</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Papel de los ingenieros</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="fa404829abc87208cc7d72b4d5b7a2798ecc627fa9406f19fbe997b40d534c13">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_11._validar_ingreso_a_la_opcion_el_software_en_la_economía_actual.html" title="View test results">11. Validar ingreso a la opcion El software en la economía actual</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: El software en la economía actual</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="919ba188b11ccfd54ead65d5b1ef5fbf1e201cfab3a7bf6be103cf0eb7ba8ab5">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_12._validar_ingreso_a_la_opcion_los_errores_del_software.html" title="View test results">12. Validar ingreso a la opcion Los errores del software</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Los errores del software</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="576c8e3b01a66481d89426c82e9ab95fbb15d8737887c75977def5285bb608b8">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_13._validar_ingreso_a_la_opcion_calidad_de_software.html" title="View test results">13. Validar ingreso a la opcion Calidad de software</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Calidad de software</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="0ad704685e1a2656bbaa28df9bdebf72f345bfe16000c953ea80a7b977b83287">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_14._validar_ingreso_a_la_opcion_fundamentos_ingeniería_de_software.html" title="View test results">14. Validar ingreso a la opcion Fundamentos ingeniería de software</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Fundamentos ingeniería de software</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="f5848f70811049f22a3287dbb35bb79744faab435d4e378a4a0d794a62dd0a17">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_15._validar_ingreso_a_la_opcion_marcos_de_trabajo_de_software__ágiles_tradicionales.html" title="View test results">15. Validar ingreso a la opcion Marcos de trabajo de software</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Marcos de trabajo de software: ágiles/tradicionales</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="455e615ea19c485db92b8087ec449a23fe1e6f42810af666f3576effab65ca09">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_16._validar_ingreso_a_la_opcion_principios_de_programación.html" title="View test results">16. Validar ingreso a la opcion Principios de programación</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Principios de programación</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="7c2250102a73c761349912b892774c3acef54ab94d6c3d324046fdc5bf0101fb">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_17._validar_ingreso_a_la_opcion_algoritmos_de_software.html" title="View test results">17. Validar ingreso a la opcion Algoritmos de software</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Algoritmos de software</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="968ac035f40f82987928a7096435b68d437ef2863cfd5ac1c2501ea47029eff6">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_18._validar_ingreso_a_la_opcion_¿qué_es_programación_por_ncapas_question_.html" title="View test results">18. Validar ingreso a la opcion ¿Qué es programación por Ncapas?</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: ¿Qué es programación por Ncapas?</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="19eecfb8574b051b940be3f7f95a623df9425b67f462a893ec5621dbd36dbc9b">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_18._validar_ingreso_a_la_opcion_manual_práctico_de_sql.html" title="View test results">18. Validar ingreso a la opcion Manual práctico de SQL</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Manual práctico de SQL</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="b113db53f5e5174d7b24b09739573ccaa9dc26a22f524a6b331413b8a0af89ca">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_19._validar_ingreso_a_la_opcion_marcos_de_trabajo_de_pruebas.html" title="View test results">19. Validar ingreso a la opcion Marcos de trabajo de pruebas</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Marcos de trabajo de pruebas</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="2f3d9fffe9d037052fe7e2ff94ddbc745567f908a8099fc0fe9e0fef9619efaa">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_20._validar_ingreso_a_la_opcion_¿qué_son_los_riesgos_del_proyecto_y_de_producto_question_.html" title="View test results">20. Validar ingreso a la opcion ¿Qué son los riesgos del proyecto y de producto?</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: ¿Qué son los riesgos del proyecto y de producto?</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="cc8da8dacf07c3be52bd32dda23195cfccc0dcc4697b88ecdc5f019991e6130e">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_21._validar_ingreso_a_la_opcion_técnicas_de_caja_negra.html" title="View test results">21. Validar ingreso a la opcion Técnicas de caja negra</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Técnicas de caja negra</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="75b0277bdb5b40024651dd8c4326c1bdbb3021e9904b16c41f33d2e7d78a7774">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_22._validar_ingreso_a_la_opcion_foundation_level_–_técnicas.html" title="View test results">22. Validar ingreso a la opcion Foundation Level – Técnicas</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Foundation Level – Técnicas</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="247440adbf817c1c515f6921a82118dafbc9757a1b632718dd5077bf21607909">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_23._validar_ingreso_a_la_opcion_fundamentos_de_la_gerencia_de_proyectos_en_desarrollo_de_software.html" title="View test results">23. Validar ingreso a la opcion Fundamentos de la gerencia de proyectos en desarrollo de software</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: Fundamentos de la gerencia de proyectos en desarrollo de software</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="120f1b349c526d552708e41880bce885f779e1972432364e5606489b8631ee91">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_24._validar_ingreso_a_la_opcion_¿cuáles_son_las_actividades_de_la_gestión_de_proyectos_question_.html" title="View test results">24. Validar ingreso a la opcion ¿Cuáles son las actividades de la Gestión de Proyectos?</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo opcion: ¿Cuáles son las actividades de la Gestión de Proyectos?</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="61d44e2ef684e648fb4aef742ad196852eb9149cdca001501e5f4c7210f696d1">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_25._validar_ingreso_a_la_opcion_ir_al_portal_de_empleos.html" title="View test results">25. Validar ingreso a la opcion Ir al portal de empleos</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo: Ir al portal de empleos</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="bced0c0c0fb83465614dafce58ff504fb9c368f04c96a46fd05a98e4e0f3b56d">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_27._validar_ingreso_a_la_opcion_¿qué_es_ser_choucair_question_.html" title="View test results">27. Validar ingreso a la opcion ¿Qué es ser Choucair?</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo seccion ¿Qué es ser Choucair?</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="scenario-docs card" id="6b4fd805d4217e0b23c62d73f3c9f0375f9173365d87783c9ab013a8d2aab086">
+                                                    <div class="scenario-docs card-header success" style="min-height:1.5em;">
+                                                        <div>
+                                                            <span class="scenario-heading">
+                                                                <a href="empleos_27._validar_ingreso_a_la_opcion_prepararse_para_aplicar.html" title="View test results">27. Validar ingreso a la opcion Prepararse para aplicar</a>
+                                                            </span>
+                                                            <span class="scenario-result-icon">
+                                                                
+
+                                                                    <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="scenario-docs card-body">
+                                                            <p>Given Ingreso al portal Choucair</p>
+                                                            <p>When Consulto opcion Empleos</p>
+                                                            <p>Then Consulto y comparo seccion Prepararse para aplicar</p>
+                                                        <div class="examples">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="results" class="tab-pane fade">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+
+                                            <div style="width:300px;" class="chart-container automated-and-manual-results">
+                                                <div class="ct-chart ct-square"></div>
+                                            </div>
+                                            <script>
+
+                                                var labels = ['100%', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
+                                                // Our series array that contains series objects or in this case series data arrays
+
+                                                var series = [{meta: 'Passing tests (automated)', value: 28}, {meta: 'Passing tests (manual)', value: 0}, {meta: 'Pending tests (automated)', value: 0}, {meta: 'Pending tests (manual)', value: 0}, {meta: 'Ignored tests (automated)', value: 0}, {meta: 'Ignored tests (manual)', value: 0}, {meta: 'Skipped tests (automated)', value: 0}, {meta: 'Skipped tests (manual)', value: 0}, {meta: 'Failing tests (automated)', value: 0}, {meta: 'Failing tests (manual)', value: 0}, {meta: 'Broken tests (automated)', value: 0}, {meta: 'Broken tests (manual)', value: 0}, {meta: 'Compromised tests (automated)', value: 0}, {meta: 'Compromised tests (manual)', value: 0}];
+
+                                                // As options we currently only set a static size of 300x200 px. We can also omit this and use aspect ratio containers
+                                                // as you saw in the previous example
+                                                var options = {
+                                                    width: 350,
+                                                    height: 300
+                                                };
+
+                                                $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                                                    new Chartist.Pie('.ct-chart', {
+                                                        series: series,
+                                                        labels: labels,
+                                                    }, {
+                                                        donut: true,
+                                                        donutWidth: 60,
+                                                        donutSolid: true,
+                                                        startAngle: 270,
+                                                        showLabel: true
+                                                    }, options);
+                                                });
+
+                                            </script>
+                                        </div>
+                                        <div class="col-sm-8">
+
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Scenario Results (including rows of test data)</th>
+                                                <th scope="col" colspan="2" class="automated-stats">
+                                                    Automated
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                                    <td class="aggregate-result-count">
+                                                                        <a href="result_success.html"><i
+                                                                                class='fa fa-check-circle-o success-icon'></i>&nbsp;Passing</a>
+                                                                    </td>
+                                                <td class="automated-stats">28</td>
+                                                <td class="automated-stats">100%</td>
+                                            </tr>
+                                            <tr>
+                                                                    <td class="aggregate-result-count"><i
+                                                                            class='fa fa-stop-circle-o pending-icon'></i>&nbsp;Pending
+                                                                    </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr>
+                                                                <td class="aggregate-result-count"><i
+                                                                        class='fa fa-ban ignored-icon'></i>&nbsp;Ignored
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr>
+                                                                <td class="aggregate-result-count"><i
+                                                                        class='fa fa-fast-forward skip-icon'></i>&nbsp;Skipped
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr>
+                                                                            <td colspan="3"><i
+                                                                                class='fa fa-times failure-icon'></i>&nbsp;<em>Unsuccessful</em></a>
+                                                                            </td>
+
+                                            </tr>
+
+                                            <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-times-circle failure-icon'></i>&nbsp;Failed
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-exclamation-triangle error-icon'></i>&nbsp;Broken
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            <tr>
+                                                                <td class="aggregate-result-count indented-error-category">
+                                                                    <i
+                                                                            class='fa fa-chain-broken compromised-icon'></i>&nbsp;Compromised
+                                                                </td>
+                                                <td class="automated-stats">0</td>
+                                                <td class="automated-stats"> </td>
+                                            </tr>
+                                            <tr class="summary-stats">
+                                                <td class="aggregate-result-count">Total</td>
+                                                <td class="automated-stats">28</td>
+                                                <td class="automated-stats"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Execution Time</th>
+                                                        <th>Clock Time</th>
+                                                        <th>Fastest Test</th>
+                                                        <th>Slowest Test</th>
+                                                        <th>Average Execution Time</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td> 1h  2m 11s</td>
+                                                        <td> 1h  4m 30s</td>
+                                                        <td> 1m 23s</td>
+                                                        <td> 3m 17s</td>
+                                                        <td> 2m 13s</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h3><i class="fas fa-clipboard-check"></i> Functional Coverage</h3>
+
+
+
+<h4 class="requireent-type-heading">Features</h4>
+
+<table class="scenario-result table" id="req-results-table">
+    <thead>
+        <tr>
+            <th class="requirement-name-column" width="60%">Feature</th>
+            <th>ID</th>
+            <th>Automated Tests</th>
+                <th>Manual Tests</th>
+            <th>Results</th>
+            <th>Coverage</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        <tr>
+
+
+            <td> 
+                <a href="feature_empleos.html">Empleos</a></span>
+            </td>
+            <td> 
+                
+            </td>
+            <td>28</td>
+            <td>0</td>
+            <td>
+                <span class="status_icon"><i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i></span>
+                <span style="display:none">1</span>
+            </td>
+
+            <td width="165px" style="padding:0px;">
+
+
+<table>
+    <tr>
+        <td width="40px" style="padding-top:4px;">
+            <div class="small" style="text-align:right;">100%</div>
+        </td>
+        <td style="min-width:12.5em;">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar"
+                     style="width: 100%; background-color:#30cb23;"
+                     aria-valuenow="28"
+                     aria-valuemin="0"
+                     aria-valuemax="28"
+                     title="  - Total tests: 28
+  - Passing tests: 28 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#A2C4EC;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="28"
+                     title="  - Total tests: 28
+  - Passing tests: 28 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:darkgrey;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="28"
+                     title="  - Total tests: 28
+  - Passing tests: 28 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#EEE098;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="28"
+                     title="  - Total tests: 28
+  - Passing tests: 28 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:#f8001f;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="28"
+                     title="  - Total tests: 28
+  - Passing tests: 28 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:darkorange;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="28"
+                     title="  - Total tests: 28
+  - Passing tests: 28 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+                <div class="progress-bar" role="progressbar"
+                     style="width: 0%; background-color:fuchsia;"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="28"
+                     title="  - Total tests: 28
+  - Passing tests: 28 (100%)
+  - Failing tests: 0 (0%)
+  - Tests with errors: 0 (0%)
+  - Compromised tests 0 (0%)
+  - Pending tests: 0 (0%)
+  - Ignored or skipped tests: 0 (0%)">
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h3><i class="fas fa-cogs"></i> Automated Tests</h3>
+
+                                            <table class="scenario-result-table table" id="scenario-results">
+                                                <thead>
+                                                <tr>
+                                                    <th class="test-name-column">Scenario</th>
+                                                    <th>Steps</th>
+                                                    <th>Start Time</th>
+                                                    <th>Duration</th>
+                                                    <th>Result</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_1._validar_ingreso_a_la_opcion_empleos.html">1. Validar ingreso a la opcion empleos</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:20:45</td>
+                                                    <td>02:42</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_2._validar_ingreso_a_la_opcion_servicios.html">2. Validar ingreso a la opcion servicios</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:23:34</td>
+                                                    <td>01:56</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_3._validar_ingreso_a_la_opcion_industrias.html">3. Validar ingreso a la opcion industrias</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:25:36</td>
+                                                    <td>01:46</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_4._validar_ingreso_a_la_opcion_formación.html">4. Validar ingreso a la opcion formación</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:27:28</td>
+                                                    <td>02:06</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_5._validar_ingreso_a_la_opcion_comunidad.html">5. Validar ingreso a la opcion comunidad</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:29:40</td>
+                                                    <td>01:30</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_6._validar_ingreso_a_la_opcion_nosotros.html">6. Validar ingreso a la opcion nosotros</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:31:12</td>
+                                                    <td>01:23</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_7._validar_ingreso_a_la_opcion_contáctenos.html">7. Validar ingreso a la opcion contáctenos</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:32:39</td>
+                                                    <td>01:42</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_8._validar_ingreso_a_la_opcion_modelo_de_calidad_de_software.html">8. Validar ingreso a la opcion Modelo de calidad de software</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:34:30</td>
+                                                    <td>02:29</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_9._validar_ingreso_a_la_opcion_diferencia_entre_calidad_de_software_y_pruebas.html">9. Validar ingreso a la opcion Diferencia entre calidad de software y pruebas</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:37:14</td>
+                                                    <td>02:08</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_10._validar_ingreso_a_la_opcion_papel_de_los_ingenieros.html">10. Validar ingreso a la opcion Papel de los ingenieros</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:39:30</td>
+                                                    <td>02:00</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_11._validar_ingreso_a_la_opcion_el_software_en_la_economía_actual.html">11. Validar ingreso a la opcion El software en la economía actual</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:41:34</td>
+                                                    <td>02:37</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_12._validar_ingreso_a_la_opcion_los_errores_del_software.html">12. Validar ingreso a la opcion Los errores del software</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:44:23</td>
+                                                    <td>03:17</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_13._validar_ingreso_a_la_opcion_calidad_de_software.html">13. Validar ingreso a la opcion Calidad de software</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:47:45</td>
+                                                    <td>02:32</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_14._validar_ingreso_a_la_opcion_fundamentos_ingeniería_de_software.html">14. Validar ingreso a la opcion Fundamentos ingeniería de software</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:50:36</td>
+                                                    <td>02:57</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_15._validar_ingreso_a_la_opcion_marcos_de_trabajo_de_software__ágiles_tradicionales.html">15. Validar ingreso a la opcion Marcos de trabajo de software</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:53:43</td>
+                                                    <td>02:31</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_16._validar_ingreso_a_la_opcion_principios_de_programación.html">16. Validar ingreso a la opcion Principios de programación</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:56:27</td>
+                                                    <td>02:31</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_17._validar_ingreso_a_la_opcion_algoritmos_de_software.html">17. Validar ingreso a la opcion Algoritmos de software</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>16:59:01</td>
+                                                    <td>01:58</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_18._validar_ingreso_a_la_opcion_¿qué_es_programación_por_ncapas_question_.html">18. Validar ingreso a la opcion ¿Qué es programación por Ncapas?</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:01:10</td>
+                                                    <td>02:27</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_18._validar_ingreso_a_la_opcion_manual_práctico_de_sql.html">18. Validar ingreso a la opcion Manual práctico de SQL</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:03:42</td>
+                                                    <td>01:33</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_19._validar_ingreso_a_la_opcion_marcos_de_trabajo_de_pruebas.html">19. Validar ingreso a la opcion Marcos de trabajo de pruebas</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:05:20</td>
+                                                    <td>01:30</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_20._validar_ingreso_a_la_opcion_¿qué_son_los_riesgos_del_proyecto_y_de_producto_question_.html">20. Validar ingreso a la opcion ¿Qué son los riesgos del proyecto y de producto?</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:06:59</td>
+                                                    <td>02:23</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_21._validar_ingreso_a_la_opcion_técnicas_de_caja_negra.html">21. Validar ingreso a la opcion Técnicas de caja negra</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:09:37</td>
+                                                    <td>02:28</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_22._validar_ingreso_a_la_opcion_foundation_level_–_técnicas.html">22. Validar ingreso a la opcion Foundation Level – Técnicas</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:12:33</td>
+                                                    <td>02:15</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_23._validar_ingreso_a_la_opcion_fundamentos_de_la_gerencia_de_proyectos_en_desarrollo_de_software.html">23. Validar ingreso a la opcion Fundamentos de la gerencia de proyectos en desarrollo de software</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:15:03</td>
+                                                    <td>02:34</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_24._validar_ingreso_a_la_opcion_¿cuáles_son_las_actividades_de_la_gestión_de_proyectos_question_.html">24. Validar ingreso a la opcion ¿Cuáles son las actividades de la Gestión de Proyectos?</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:17:42</td>
+                                                    <td>02:32</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_25._validar_ingreso_a_la_opcion_ir_al_portal_de_empleos.html">25. Validar ingreso a la opcion Ir al portal de empleos</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:20:21</td>
+                                                    <td>02:24</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_27._validar_ingreso_a_la_opcion_¿qué_es_ser_choucair_question_.html">27. Validar ingreso a la opcion ¿Qué es ser Choucair?</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:22:51</td>
+                                                    <td>02:05</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="scenario-result SUCCESS">
+                                                    <td>
+                                                            <a href="empleos_27._validar_ingreso_a_la_opcion_prepararse_para_aplicar.html">27. Validar ingreso a la opcion Prepararse para aplicar</a>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td>17:25:14</td>
+                                                    <td>01:39</td>
+                                                    <td>
+                                                            <i class='fa fa-check-circle-o success-icon ' title='SUCCESS'></i> <span
+                                                                style="display:none">SUCCESS</span>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h3><i class="fas fa-edit"></i> Manual Tests</h3>
+
+                                                No manual tests were recorded
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="version">Serenity BDD version 2.0.57</span>
+                    </div>
+                </div>
+            </div>
+</body>
+</html>
